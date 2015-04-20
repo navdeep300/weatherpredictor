@@ -5,7 +5,74 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="Content-Type" content="text/html; charset="utf-8 " />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="bootstrap.min.css" />
+	<link rel="stylesheet" href="bootstrap.min.css" />
+
+	<script type="text/javascript">
+	function _validate() {
+	var emVal, nmVal, MessVal;
+	var _email = document.getElementById('email').value;
+	var _name = document.getElementById('name').value;
+	var _message = document.getElementById('message').value;
+	var _lblError = document.getElementById('lblError');
+
+	if (_email != "" || _email != null) {
+	var b = _emailValidator(_email);
+	if (b == false) {
+	_lblError.innerHTML = "Invalid Email";
+	emVal = false;
+	}
+	else {
+	emVal = true;
+	if (_name == "" || _name == null) {
+	_lblError.innerHTML = "Enter Your Name";
+	nmVal = false;
+	}
+	else {
+	nmVal = true;
+	if (_message == "" || _message == null) {
+	_lblError.innerHTML = "Enter your message";
+	MessVal = false;
+	}
+	else {
+	MessVal = true;
+	if (emVal == true && nmVal == true && MessVal == true) {
+	alert("Message Submitted Successfuly We will Contact You Soon.");
+	postIt();
+
+	}
+
+	}
+	}
+	}
+	}
+
+	else {
+	_lblError.innerHTML = "Enter Email ID";
+	emVal = false;
+	}
+
+
+	}
+	function _emailValidator(_email) {
+	var a;
+	var lastAtPos = _email.lastIndexOf('@');
+	var lastDotPos = _email.lastIndexOf('.');
+	if (lastAtPos < lastDotPos && lastAtPos > 0 && lastDotPos > 2 && (_email.length - lastDotPos) > 2) {
+	a = true;
+	}
+	else {
+	a = false;
+	}
+	return a;
+	}
+	function hideIt() {
+	document.getElementById('lblError').innerHTML = "";
+	}
+	function postIt() {
+	document.forms["_form"].submit();
+	}
+	</script>
+
 
 <style>
 
@@ -44,6 +111,12 @@
 		padding-top:20px;	
 	}
 		
+	.pad1 {
+		padding-left:7px;
+		margin-left:5px;
+
+	}
+
 		button {
 		margin-top:20px;
 	}
@@ -98,8 +171,9 @@
 									<textarea id="message" class="input" name="message" rows="5" cols="30"></textarea><br />
 
 							</div>
-
-							<button class="btn btn-lg btn-success ">Submit</button>
+							<label id="lblError" class="white">&nbsp;</label></br>
+							<input type="button" class="btn btn-lg btn-success" id="_submit" value="Submit" onclick="_validate()">
+							<input type="reset" id="reset" class="btn btn-lg btn-success pad1" value="Reset Fields"><br>
 
 						</form>						
 					
